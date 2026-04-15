@@ -46,7 +46,7 @@ session_start();
         const chatDialog = document.querySelector(".chat-dialog");
         let dateHeureSysMessagerie;
         let dateHeureMessageUser;
-
+        const tabClass = ["message-user", "message-user1", "message-user2", "message-user3", "message-user4"];
 
         function formatDateTime() {
             const timeNow = new Date();
@@ -68,7 +68,7 @@ session_start();
         function getMessage() {
             if (message.value == "")
                 return;
-            // const time = new Date();
+
             let heure;
             heure = formatDateTime();
             dateHeureMessageUser = heure;
@@ -76,10 +76,12 @@ session_start();
             let mes = message.value;
             console.log(mes);
             console.log(message.value);
+
+
             chatDialog.innerHTML += `<div class="message-user">
                             <span class="heure">${heure}</span>
                             <span class="pseudo">${pseudo}:</span>
-                            <p>${mes}</p> `
+                            <p>${mes}</p></div> `
 
             message.value = "";
             sendMessage(mes);
@@ -130,7 +132,7 @@ session_start();
          * cette fonction doit metre a jour le panneau chat
          */
         function updateChat(result) {
-            let dateHeure = formatDateTime(); //debug
+
             console.log("Bravo");
             const bddDatesMessages = result["bddMessage"];
 
@@ -142,21 +144,25 @@ session_start();
                 dateHeureSysMessagerie = bddDatesMessages[idx - 1]["date"];
 
                 for (let i = 0; i < bddDatesMessages.length; i++) {
-                 
-                    
+
+
                     if (bddDatesMessages[i].pseudo === "<?= $pseudo ?>") {
-                        
+
                         continue;
                     }
-                    
+
                     chatDialog.innerHTML += `<div class="message-user">
                             <span class="heure">${bddDatesMessages[i].date}</span>
                             <span class="pseudo">${bddDatesMessages[i].pseudo}:</span>
                             <p>${bddDatesMessages[i].message_user}</p></div> `
+
                 }
-const nouvelleDivArray = document.querySelectorAll(".message-user"); 
-let i = nouvelleDivArray.length ;
-nouvelleDivArray[i-1].scrollIntoView({ behavior: 'smooth', block: 'end' });
+                const nouvelleDivArray = document.querySelectorAll(".message-user");
+                let i = nouvelleDivArray.length;
+                nouvelleDivArray[i - 1].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'end'
+                });
             }
         }
 
@@ -170,7 +176,6 @@ nouvelleDivArray[i-1].scrollIntoView({ behavior: 'smooth', block: 'end' });
         async function getMessageInDatabase() {
             if (dateHeureSysMessagerie == undefined)
                 dateHeureSysMessagerie = formatDateTime();
-
             try {
                 const response = await fetch("scan.php", {
                     method: 'POST',
@@ -188,7 +193,6 @@ nouvelleDivArray[i-1].scrollIntoView({ behavior: 'smooth', block: 'end' });
                 const result = await response.json();
 
                 if (result.status == "succes") {
-                    // console.log(result);      // debug le tableaux
                     updateChat(result);
                 }
             } catch (e) {

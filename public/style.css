@@ -89,6 +89,50 @@ main{
      }
 }
 
+.message-user1{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(196, 177, 10);
+     }
+}
+
+.message-user2{
+     & .heure{
+            color:rgb(98, 187, 20);
+     }
+     & .pseudo{
+            color:rgb(208, 33, 80);
+     }
+}
+
+.message-user3{
+     & .heure{
+            color:rgb(215, 239, 110);
+     }
+     & .pseudo{
+            color:rgb(5, 142, 160);
+     }
+}
+
+.message-user5{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(196, 177, 10);
+     }
+}
+
+.message-user6{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(196, 177, 10);
+     }
+}
 
 
 @media screen and (max-width: 640px) {
