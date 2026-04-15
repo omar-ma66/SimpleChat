@@ -12,10 +12,11 @@ header("content-type:application/json");
 $message = $data["message"];
 $id      = (int) $data["user_id"];
 $dateTime =      $data["dateHeure"];
+$pseudo   =   $data["pseudo"]; 
 
-                            $query = "INSERT INTO messages(message_user,date,user_id)values( :mes ,:date_ , :id ) ";
+                            $query = "INSERT INTO messages(message_user,date,user_id ,pseudo)values( :mes ,:date_ , :id , :pseudo ) ";
                     $reqPreparer =      $idcon->prepare($query);
-                        $dataPreparer = ["mes"=>$message ,"date_"=>$dateTime, "id"=>$id];
+                        $dataPreparer = ["mes"=>$message ,"date_"=>$dateTime, "id"=>$id ,"pseudo"=>$pseudo];
 
                         $reqPreparer->execute($dataPreparer);
 
@@ -23,12 +24,16 @@ $dateTime =      $data["dateHeure"];
                             {
                                 $result = ["status"=>"succes"] ;
                                   echo json_encode($result);
+                                  $reqPreparer->closeCursor();
+                                  $idcon=null;
                                   exit;
                             }
                         else
                             {
                                $result = ["status"=>"echec"] ;
                                   echo json_encode($result);
+                                    $reqPreparer->closeCursor();
+                                  $idcon=null;
                                   exit;   
                             }
                             }

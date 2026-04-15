@@ -44,19 +44,18 @@ session_start();
     <script type="text/javascript">
         const message = document.querySelector("#idmessage");
         const chatDialog = document.querySelector(".chat-dialog");
-        let  dateHeureSysMessagerie ;
-        let  dateHeureMessageUser ;
-        
+        let dateHeureSysMessagerie;
+        let dateHeureMessageUser;
 
-        function formatDateTime()
-        {
+
+        function formatDateTime() {
             const timeNow = new Date();
             const dateDuJour = timeNow.toLocaleDateString();
             const heureDuJour = timeNow.toLocaleTimeString();
-            const dateDuJourArray =  dateDuJour.split('/');
-            let dateHeureDuJour = dateDuJourArray[2]+"-"+dateDuJourArray[1]+"-"+dateDuJourArray[0];
-            dateHeureDuJour += " "+heureDuJour;  
-            return dateHeureDuJour ;
+            const dateDuJourArray = dateDuJour.split('/');
+            let dateHeureDuJour = dateDuJourArray[2] + "-" + dateDuJourArray[1] + "-" + dateDuJourArray[0];
+            dateHeureDuJour += " " + heureDuJour;
+            return dateHeureDuJour;
         }
 
         /**
@@ -70,9 +69,9 @@ session_start();
             if (message.value == "")
                 return;
             // const time = new Date();
-             let heure ;
-             heure = formatDateTime();
-               dateHeureMessageUser = heure ; 
+            let heure;
+            heure = formatDateTime();
+            dateHeureMessageUser = heure;
             let pseudo = '<?= $pseudo ?>';
             let mes = message.value;
             console.log(mes);
@@ -104,7 +103,8 @@ session_start();
                     body: JSON.stringify({
                         message: mes,
                         user_id: <?= $id ?>,
-                        dateHeure : dateHeureMessageUser
+                        dateHeure: dateHeureMessageUser,
+                        pseudo: "<?= $pseudo ?>"
                     })
                 });
                 if (!response.ok) {
@@ -130,19 +130,40 @@ session_start();
          * cette fonction doit metre a jour le panneau chat
          */
         function updateChat(result) {
-         let dateHeure;
-       
-                    dateHeure = formatDateTime(); //debug
-              
+            let dateHeure = formatDateTime(); //debug
             console.log("Bravo");
             const bddDatesMessages = result["bddMessage"];
 
             console.log(bddDatesMessages);
-            for (let i = 0; i < bddDatesMessages.length; i++) {
-                console.log(bddDatesMessages[i]["date"] );
+
+            if (bddDatesMessages.length >= 1) {
+
+                let idx = bddDatesMessages.length;
+                dateHeureSysMessagerie = bddDatesMessages[idx - 1]["date"];
+
+
+                //  for (let i = 0; i < bddDatesMessages.length; i++) {
+                //      console.log(bddDatesMessages[i]["date"] );
+                //      console.log(bddDatesMessages[i]["pseudo"] );
+                //      console.log(bddDatesMessages[i]["message_user"] );
+                //  }
+
+                for (let i = 0; i < bddDatesMessages.length; i++) {
+                 
+                    
+                    if (bddDatesMessages[i].pseudo === "<?= $pseudo ?>") {
+                        
+                        continue;
+                    }
+                    
+                    chatDialog.innerHTML += `<div class="message-user">
+                            <span class="heure">${bddDatesMessages[i].date}</span>
+                            <span class="pseudo">${bddDatesMessages[i].pseudo}:</span>
+                            <p>${bddDatesMessages[i].message_user}</p></div> `
+                }
+
             }
-            console.log(dateHeure);
-           
+
         }
 
 
@@ -154,8 +175,8 @@ session_start();
          * 
          */
         async function getMessageInDatabase() {
-            if(dateHeureSysMessagerie == undefined)
-                 dateHeureSysMessagerie = formatDateTime();
+            if (dateHeureSysMessagerie == undefined)
+                dateHeureSysMessagerie = formatDateTime();
 
             try {
                 const response = await fetch("scan.php", {
@@ -172,6 +193,7 @@ session_start();
                     throw new Error("Serveur erreur");
                 }
                 const result = await response.json();
+
                 if (result.status == "succes") {
                     // console.log(result);      // debug le tableaux
                     updateChat(result);
@@ -179,7 +201,7 @@ session_start();
             } catch (e) {
                 console.log(`une erreur c'est produite `);
             } finally {
-                setTimeout(getMessageInDatabase, 3000);
+                setTimeout(getMessageInDatabase, 10000);
             }
         }
         /******************************************************************************************************** */
