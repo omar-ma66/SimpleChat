@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="w-screen h-screen">
+  <div id="boite1" class="w-4/5 border-2 border-b-blue-900 bg-blue-300 text-cyan-900 flex flex-row  items-center justify-center ">
+
+      <div class="overflow-hidden border-2 border-b-blue-900 bg-blue-300 text-cyan-900 flex flex-row  justify-between ">
+            <span>Heure:</span><span>pseudo</span><p class=" truncate ">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odio sunt nihil ex fuga, minima voluptate inventore cumque sapiente repellat. Provident corrupti laboriosam aperiam ad officia pariatur aliquam, sint possimus maxime.</p>
+      </div>
+----------------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Chat PHP</title>
+    <style>
+        #chat-box { width: 400px; height: 300px; border: 1px solid #ccc; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+        .msg { margin-bottom: 8px; border-bottom: 1px solid #eee; }
+        .pseudo { font-weight: bold; color: #007bff; }
+        .time { font-size: 0.8em; color: #999; }
+    </style>
+</head>
+<body>
+
+    <h2>Chat en direct</h2>
+    <div id="chat-box"></div>
+    
+    <input type="text" id="user-message" placeholder="Votre message...">
+    <button onclick="sendMessage()">Envoyer</button>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const messageInput = document.getElementById('user-message');
+
+        // Charger les messages
+        async function loadMessages() {
+            try {
+                const response = await fetch('api.php');
+                const messages = await response.json();
+                
+                chatBox.innerHTML = '';
+                messages.forEach(m => {
+                    chatBox.innerHTML += `
+                        <div class="msg">
+                            <span class="pseudo">${m.pseudo}</span> 
+                            <span class="time">[${m.date}]</span><br>
+                            ${m.message_user}
+                        </div>`;
+                });
+                // Auto-scroll vers le bas
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error("Erreur de chargement :", error);
+            }
+        }
+
+        // Envoyer un message
+        async function sendMessage() {
+            const message = messageInput.value;
+            if (!message) return;
+
+            await fetch('api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            });
+
+            messageInput.value = '';
+            loadMessages(); // Rafraîchir immédiatement
+        }
+
+        // Rafraîchir toutes les 5 secondes (5000 ms)
+        setInterval(loadMessages, 5000);
+
+        // Chargement initial
+        loadMessages();
+    </script>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------------
+<?php
+$host = 'localhost';
+$db   = 'ton_nom_de_bdd';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$pdo = new PDO($dsn, $user, $pass);
+
+// 1. Récupérer les messages
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $stmt = $pdo->query("SELECT m.message_user, m.date, u.pseudo 
+                         FROM message m 
+                         JOIN users u ON m.id_user = u.user_id 
+                         ORDER BY m.date ASC");
+    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    exit;
+}
+
+// 2. Envoyer un message
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    if (!empty($data['message'])) {
+        $stmt = $pdo->prepare("INSERT INTO message (message_user, id_user) VALUES (?, ?)");
+        $stmt->execute([$data['message'], 1]); // ID 1 fixe pour l'exemple
+        echo json_encode(['status' => 'success']);
+    }
+    exit;
+}
+--------------------------------------------------------------------------------------------------------

@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="mt-50 ml-50 w-200 h-96 border border-b-blue-400 bg-amber-200 rond rounded-sm flex flex-col ">
+
+    <div class="px-5 flex flex-row flex-start items-center gap-6 w-full border-2 bg-amber-500 border-b-blue-800 rounded-[10px] ">
+      <div>
+        <span class="inline-block px-5 bg-amber-800 text-amber-300 font-bold">heure</span> <span class="inline-block px-5 bg-amber-100">pseudo</span>
+      </div>
+      <p class="self-start p-1 text-2xl">messagebis</p>
+    </div>
+    <div class="flex flex-row justify-between w-full border-2 bg-amber-500 border-b-blue-800 rounded-4xl ">
+      <span>heure</span> <span>pseudo</span>
+      <p>message</p>
+    </div>
+    <div class=" w-full border-2 bg-amber-500 border-b-blue-800 rounded-4xl ">
+      <span>heure</span> <span>pseudo</span>
+      <p>message</p>
+    </div>
+    <div class=" w-full border-2 bg-amber-500 border-b-blue-800 rounded-4xl ">
+      <span>heure</span> <span>pseudo</span>
+      <p>message</p>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
