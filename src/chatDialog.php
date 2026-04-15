@@ -77,12 +77,12 @@ session_start();
             console.log(mes);
             console.log(message.value);
 
-
-            chatDialog.innerHTML += `<div class="message-user">
+/*
+            chatDialog.innerHTML += `<div class="message-user2">
                             <span class="heure">${heure}</span>
                             <span class="pseudo">${pseudo}:</span>
                             <p>${mes}</p></div> `
-
+*/
             message.value = "";
             sendMessage(mes);
         }
@@ -145,12 +145,12 @@ session_start();
 
                 for (let i = 0; i < bddDatesMessages.length; i++) {
 
-
+/*
                     if (bddDatesMessages[i].pseudo === "<?= $pseudo ?>") {
 
                         continue;
                     }
-
+*/
                     chatDialog.innerHTML += `<div class="message-user">
                             <span class="heure">${bddDatesMessages[i].date}</span>
                             <span class="pseudo">${bddDatesMessages[i].pseudo}:</span>
@@ -198,7 +198,7 @@ session_start();
             } catch (e) {
                 console.log(`une erreur c'est produite `);
             } finally {
-                setTimeout(getMessageInDatabase, 3000);
+                setTimeout(getMessageInDatabase, 2000);
             }
         }
         /******************************************************************************************************** */
