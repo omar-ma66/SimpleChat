@@ -141,13 +141,6 @@ session_start();
                 let idx = bddDatesMessages.length;
                 dateHeureSysMessagerie = bddDatesMessages[idx - 1]["date"];
 
-
-                //  for (let i = 0; i < bddDatesMessages.length; i++) {
-                //      console.log(bddDatesMessages[i]["date"] );
-                //      console.log(bddDatesMessages[i]["pseudo"] );
-                //      console.log(bddDatesMessages[i]["message_user"] );
-                //  }
-
                 for (let i = 0; i < bddDatesMessages.length; i++) {
                  
                     
@@ -161,11 +154,11 @@ session_start();
                             <span class="pseudo">${bddDatesMessages[i].pseudo}:</span>
                             <p>${bddDatesMessages[i].message_user}</p></div> `
                 }
-
+const nouvelleDivArray = document.querySelectorAll(".message-user"); 
+let i = nouvelleDivArray.length ;
+nouvelleDivArray[i-1].scrollIntoView({ behavior: 'smooth', block: 'end' });
             }
-
         }
-
 
         /****
          * 
@@ -201,7 +194,7 @@ session_start();
             } catch (e) {
                 console.log(`une erreur c'est produite `);
             } finally {
-                setTimeout(getMessageInDatabase, 10000);
+                setTimeout(getMessageInDatabase, 3000);
             }
         }
         /******************************************************************************************************** */
