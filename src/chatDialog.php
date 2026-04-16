@@ -1,28 +1,23 @@
 <?php
 session_start();
-
+   
+    $pseudo = $_SESSION['pseudo'];
+    $id     = $_SESSION['user_id'];
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/style1.css">
     <title>chatDialog</title>
-
 </head>
-
 <body>
     <h1>ChatDialog</h1>
-    <a class="connectUser" href="deconnecter.php">se deconnecte</a>
-    <?php
-    $pseudo = $_SESSION['pseudo'];
-    $id     = $_SESSION['user_id'];
-    // echo $_SESSION['pseudo'], "<br>";
-    // echo $_SESSION['user_id'], "<br>";
-    ?>
+    <div class="ligne-connect">
+    <a class="connectUser" href="deconnecter.php">se deconnecte</a> 
+    <span class="pseudo-titre"><?= $pseudo ?></span>
+  </div>
 
     <main>
         <div id="start">
@@ -142,14 +137,11 @@ session_start();
                 if (result.status === 'succes') {
                     console.log("Message envoyer avec succes ");
                 }
-                //   loadMessage();
+            
             } catch (e) {
                 console.log("Erreur d'envoi", e);
             }
-
         }
-
-
         /****
          * 
          * 
@@ -180,7 +172,7 @@ session_start();
                                         }
                     */
 
-                    let classUser = "message-user" + bddDatesMessages[i].user_id;
+                    let classUser = "message-user" + Math.min (bddDatesMessages[i].user_id,5);
                     chatDialog.innerHTML += `<div class="${classUser}">
                             <span class="heure">${bddDatesMessages[i].date}</span>
                             <span class="pseudo">${bddDatesMessages[i].pseudo}:</span>

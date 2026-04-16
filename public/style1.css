@@ -1,12 +1,17 @@
  :root{
     font-size: 1rem;
-    --back-color:#f5e8e8;
+    --back-color:#1085a6;
 }
 *,*::after,*::before{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-  
+}
+.send{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-evenly;
+   padding: 3px 0;
 }
 body{
     background-color:var(--back-color) ;
@@ -29,7 +34,21 @@ h1{
        border: 1px solid gray;
        border-radius: 5px;
 }
-
+.ligne-connect{
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       padding: 10px;
+       gap: 12px;
+}
+.pseudo-titre{
+       font-size: 1.5rem;
+       color: greenyellow;
+       background-color: green;
+       padding: 10px;
+       border-radius: 5px;
+       box-shadow: 5px 5px 5px rgb(3, 110, 3);
+}
 
 form{
 width: 400px;   
@@ -175,7 +194,7 @@ main{
      }
 }
 
-.message-user5{
+.message-user4{
      & .heure{
             color:rgb(245, 195, 13);
      }
@@ -187,7 +206,7 @@ main{
      }
 }
 
-.message-user6{
+.message-user5{
      & .heure{
             color:blue;
      }
