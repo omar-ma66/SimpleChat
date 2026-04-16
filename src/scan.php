@@ -12,8 +12,11 @@ if ($data) {
     $idcon = PDOconnect("param", "chat");
     //  $query = "SELECT * FROM messages where id_message > $date_message";
     $query = "SELECT * FROM messages where date > :date_message";
+    $query2 = "SELECT pseudo FROM present where connecter='oui'";
 
+    $resultParticipant = $idcon->query($query2);
     $reqPrepare = $idcon->prepare($query);
+
     $dataReq = ["date_message" => $date_message];
     $isOK = $reqPrepare->execute($dataReq);
 
@@ -29,10 +32,12 @@ if ($data) {
 
     
         $massageAll = $reqPrepare->fetchAll(PDO::FETCH_ASSOC);
-        // error_log(print_r($massageAll, true));
+        $participantAll = $resultParticipant->fetchAll(PDO::FETCH_NUM);
+        //  error_log(print_r($participantAll, true));
+        $resultParticipant->closeCursor();
         $reqPrepare->closeCursor();
         $idcon = null ;
-        echo json_encode(["status" => "succes", "bddMessage" => $massageAll]);
+        echo json_encode(["status" => "succes", "bddMessage" => $massageAll,"participant"=>$participantAll]);
 
     }
 }
