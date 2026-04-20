@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatDialog</title>
+    <link rel="stylesheet" href="public/css/style.css" type="text/css" />
+  
+  </head>
+  <body class="w-screen h-screen">
+    <main class="flex flex-col justify-center">
+      <section
+        class="md:flex flex-row justify-between bg-[#734B5E] items-center text-[#F5D3C8] font-extrabold text-[40px] rounded-tl-[30px] rounded-tr-[30px]"
+      >
+        <h3 class=" ">USER:</h3>
+        <!-- <h3 class="p-10 ml-7.5 ">USER:</h3> -->
+        <div class="flex flex-row justify-between gap-10">
+          <h3>Tchache</h3>
+          <h3 class="pr-5">Aplication</h3>
+        </div>
+      </section>
+      <section
+        class="flex flex-row justify-around bg-[#565857] items-center text-[#F5D3C8] text-[40px] gap-0"
+      >
+        <img src="public/png/twitch-line.png" alt="twitch-line.png" />
+        <h3>MiniChat</h3>
+        <h3 class="hidden sm:flex">Participants</h3>
+      </section>
+      <section class="sm:flex flex-row justify-between items-center">
+        <div class="chat-dialog h-[77vh] flex-3 bg-[#D9D9D9] text-2xl"></div>
+       
+        <div  class="flex flex-row justify-between sm:hidden">
+          <button onclick="getMessage()" class="hover:scale-125">
+            <img class="sm:hidden" src="public/png/send-ins-fill.png" alt="send-ins-fill.png" />
+          </button>
+          <input
+            type="text"
+            id="idmessage"
+            class="idmessage2 w-full text-[30px] bg-[#F5D3C8] sm:hidden"
+          />
+        </div>
+
+        <h3 class="flex sm:hidden text-[#F5D3C8] text-[40px] bg-[#565857]">
+          Participants
+        </h3>
+        <div
+          class="chat-participant chat-dialog h-[77vh] flex-1 bg-[#565857] text-2xl text-center text-amber-100"
+        ></div>
+      </section>
+      <div class="hidden sm:flex flex-row justify-between">
+        
+        <button onclick="getMessage()" class="hover:scale-125">
+          <img src="public/png/send-ins-fill.png" alt="send-ins-fill.png" />
+        </button>
+        <input
+          type="text"
+          id="idmessage"
+          class="idmessage1 w-full text-[30px] bg-[#F5D3C8] hidden sm:flex"
+        />
+      </div>
+    </main>
+  </body>
+</html>

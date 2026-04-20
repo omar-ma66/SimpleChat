@@ -1,2 +1,74 @@
 @import "tailwindcss";
 
+
+.message-user{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(196, 177, 10);
+     }
+     & .message{
+        color:rgb(196, 177, 10);
+     }
+}
+
+.message-user1{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(196, 177, 10);
+     }
+     & .message{
+       color:rgb(196, 177, 10);
+     }
+}
+
+.message-user2{
+     & .heure{
+            color:rgb(98, 187, 20);
+     }
+     & .pseudo{
+            color:rgb(91, 208, 234);
+     }
+     & .message{
+           color:rgb(91, 208, 234);
+     }
+}
+
+.message-user3{
+     & .heure{
+            color:rgb(215, 239, 110);
+     }
+     & .pseudo{
+            color:rgb(100, 5, 160);
+     }
+     & .message{
+           color:rgb(100, 5, 160);
+     }
+}
+
+.message-user4{
+     & .heure{
+            color:rgb(245, 195, 13);
+     }
+     & .pseudo{
+            color:rgb(241, 53, 184);
+     }
+     & .message{
+           color:rgb(241, 53, 184);
+     }
+}
+
+.message-user5{
+     & .heure{
+            color:blue;
+     }
+     & .pseudo{
+            color:rgb(187, 219, 10);
+     }
+     & .message{
+           color:rgb(187, 219, 10);
+     }
+}
