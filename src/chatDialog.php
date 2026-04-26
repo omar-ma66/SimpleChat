@@ -28,8 +28,10 @@ const VERSION = 1; // 1 OR 2
         <main class="flex flex-col justify-center">
             <section
                 class="md:flex flex-row justify-between bg-[#734B5E] items-center text-[#F5D3C8] font-extrabold text-[40px] rounded-tl-[30px] rounded-tr-[30px]">
-                <h3 >USER:</h3>
+                <h3 >USER:<?= $pseudo ?></h3>
+                 
                 <div class="flex flex-row justify-between gap-10">
+                    <a href="deconnecter.php">quiter</a>
                     <h3>Tchatche</h3>
                     <h3 class="pr-5">Application</h3>
                 </div>
@@ -292,7 +294,7 @@ const VERSION = 1; // 1 OR 2
             } catch (e) {
                 console.log(`une erreur c'est produite `);
             } finally {
-                setTimeout(getMessageInDatabase, 2000);
+                setTimeout(getMessageInDatabase,  1500);
             }
         }
         /******************************************************************************************************** */
