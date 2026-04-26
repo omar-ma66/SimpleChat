@@ -4,7 +4,7 @@ session_start();
 $pseudo = $_SESSION['pseudo'];
 $id     = $_SESSION['user_id'];
 
-const VERSION = 1; // 1 OR 2
+const VERSION = 2; // 1 OR 2
 
 ?>
 <!DOCTYPE html>
@@ -171,7 +171,7 @@ const VERSION = 1; // 1 OR 2
             console.log(mes);
             console.log(message.value);
 
-            <?php if (VERSION == 2): ?>
+            <?php if (VERSION == 3): ?>
                 chatDialog.innerHTML += `<div class="message-user2">
                                         <span class="heure">${heure}</span>
                                         <span class="pseudo">${pseudo}:</span>
