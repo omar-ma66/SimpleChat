@@ -1,3 +1,6 @@
+<?php
+header("location:public/index.php");
+?>
 <!doctype html>
 <html lang="fr">
   <head>
